@@ -15,6 +15,10 @@ public interface FileSystemScanner
 	 * that corresponds to the OS designation
 	 */
 	
+	public FileSystemScanner();
+	/**
+	 * Constructor
+	 * /
 	
 	String windows7MusicFolderName = "C:\\Users\\" + userName + "\\Music";
 	String windows8MusicFolederName = windows7MusicFolderName;
@@ -29,7 +33,7 @@ public interface FileSystemScanner
 	 * Music library on different systems
 	 */
 	
-	String[] returnPathNames();
+	public String[] returnPathNames();
 	/**
 	 * This method provided with the default music directory for the system,
 	 * will return an array of Strings, each corresponding to the pathName
