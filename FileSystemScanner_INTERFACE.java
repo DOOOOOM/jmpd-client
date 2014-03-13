@@ -18,7 +18,7 @@ public interface FileSystemScanner
 	public FileSystemScanner();
 	/**
 	 * Constructor
-	 * /
+	 */
 	
 	String windows7MusicFolderName = "C:\\Users\\" + userName + "\\Music";
 	String windows8MusicFolederName = windows7MusicFolderName;
