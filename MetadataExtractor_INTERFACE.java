@@ -10,6 +10,12 @@ import mp3agic.*;
 
 public interface MetadataExtractor 
 {
+	
+	public void MetadataExtractor();
+	/**
+	 * Constructor
+	 * /
+	
 	String extractArtistFrom(Mp3File m);
 	/* The extractArtistFrom method checks the ID3 version of the mp3 file and 
 	 * extracts the artist's name from the MP3 file.
