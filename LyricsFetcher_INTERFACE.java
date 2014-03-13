@@ -1,6 +1,3 @@
-import java.net.*;
-import java.io.*;
-
 /**
  * The LyricsFetcher is a tool that allows us to look for lyrics corresponding to a song,
  * given the song and artist name. This information will be manipulated to make an url that
@@ -9,18 +6,13 @@ import java.io.*;
  * 
  * */
 
-public interface LyricsFetcher 
-{
-	
+public interface LyricsFetcher {
 	String domainURL = "http://www.azlyrics.com/lyrics/";
 	/*
 	 * The domainURL will be concatenated with a string from this class the make-up the URL to be accessed
 	 */
-	 
-	public LyricsFetcher();
 	
-	
-	private String constructURL(String artistName, String songName);
+	public String constructURL(String artistName, String songName);
 	/**The constructURL method will manipulate the artistName and songName to mimic the format
 	 * of URL that the azlyrics domain typically uses for its URLs and will append it to the 
 	 * base URL (domainURL), the whole String being returned at the end.
@@ -28,7 +20,7 @@ public interface LyricsFetcher
 	 * @Post: the string returned is a valid string
 	 * */
 	
-	private String fetchLyrics(String completeURL);
+	public String fetchLyrics(String completeURL);
 	/** The fetchLyrics method, given an URL as argument, will open a buffered stream and read the html
 	 * code on the page referred to by the URL. The code will then be parsed to extract the lyrics
 	 * of the song as a String, that will be returned in the end. 
@@ -36,12 +28,4 @@ public interface LyricsFetcher
 	 * @Pre: the URL provided is non empty
 	 * @Post: a valid String is returned after execution of the method 
 	 */
-	 
-	 public String fetch(String artistName, String songName);
-	 /**
-	  * The fetch method will coordinate the fetching routine, using the previously described
-	  * methods. This is the method that will be interfacing with outside classes.
-	  * @Pre: the artistName and songName are available and are valid strings	 
-	  * @Post: the string returned is a valid string 
-	  * /
 }

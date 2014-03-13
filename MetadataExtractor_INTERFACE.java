@@ -1,5 +1,3 @@
-import mp3agic.*;
-
 /**
  * This class will carry out operations to extract diverse information from
  * the ID3 tag of a specified mp3 file. It will use functionalities from
@@ -7,15 +5,7 @@ import mp3agic.*;
  *  
  * */
 
-
-public interface MetadataExtractor 
-{
-	
-	public void MetadataExtractor();
-	/**
-	 * Constructor
-	 * /
-	
+public interface MetadataExtractor {
 	String extractArtistFrom(Mp3File m);
 	/* The extractArtistFrom method checks the ID3 version of the mp3 file and 
 	 * extracts the artist's name from the MP3 file.
@@ -28,7 +18,7 @@ public interface MetadataExtractor
 	 * 
 	 */
 	
-	String extractAlbumFrom(Mp3File m)
+	String extractAlbumFrom(Mp3File m);
 	/* The extractAlbumFrom method checks the ID3 version of the mp3 file and 
 	 * extracts the artist's name from the MP3 file.
 	 * 
