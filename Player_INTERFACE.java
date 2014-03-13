@@ -7,6 +7,9 @@
 public interface Player
 {
 	public Player(InitialPlayqueue);
+	/**
+	 * Constructor
+	 */
 	
 	private Playlist playqueue;
 	/**
@@ -26,7 +29,6 @@ public interface Player
 	 * to start after a next() or previous() operation
 	 */
 	
-	//A currentposition variable will be needed
 	
 	void play();
 	/**
