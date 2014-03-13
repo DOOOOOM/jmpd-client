@@ -1,6 +1,3 @@
-import java.net.*;
-import java.io.*;
-
 /**
  * The LyricsFetcher is a tool that allows us to look for lyrics corresponding to a song,
  * given the song and artist name. This information will be manipulated to make an url that
@@ -9,14 +6,11 @@ import java.io.*;
  * 
  * */
 
-public interface LyricsFetcher 
-{
-	
+public interface LyricsFetcher {
 	String domainURL = "http://www.azlyrics.com/lyrics/";
 	/*
 	 * The domainURL will be concatenated with a string from this class the make-up the URL to be accessed
 	 */
-	
 	
 	public String constructURL(String artistName, String songName);
 	/**The constructURL method will manipulate the artistName and songName to mimic the format
