@@ -41,7 +41,7 @@ public interface FileSystemScanner
 	 * @ Pre: the musicFolderPath is a valid String
 	 * @ Pre: the musicFolderPath is a valid directory path
 	 * @ Post: None of the paths returned by the method are folders
-	 * return transition
+	 * 
 	 * 
 	 * 
 	 */	
