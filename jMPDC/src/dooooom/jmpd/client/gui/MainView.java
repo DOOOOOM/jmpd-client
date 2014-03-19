@@ -1,4 +1,5 @@
 package dooooom.jmpd.client.gui;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -42,6 +43,7 @@ public class MainView {
 		c.anchor = GridBagConstraints.LINE_START;
 		c.weightx = 1;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		mainFrame.add(mainMenu, c);
 		
 		c = new GridBagConstraints();
@@ -51,6 +53,7 @@ public class MainView {
 		c.gridheight = 2;
 		c.weightx = 0;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.NONE;
 		mainFrame.add(prevButton, c);
 		
 		c = new GridBagConstraints();
@@ -60,6 +63,7 @@ public class MainView {
 		c.gridheight = 2;
 		c.weightx = 0;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.NONE;
 		mainFrame.add(playPauseButton, c);
 		
 		c = new GridBagConstraints();
@@ -69,6 +73,7 @@ public class MainView {
 		c.gridheight = 2;
 		c.weightx = 0;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.NONE;
 		mainFrame.add(nextButton, c);
 		
 		c = new GridBagConstraints();
@@ -77,6 +82,7 @@ public class MainView {
 		c.gridy = 1;
 		c.weightx = 1;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		mainFrame.add(currentTitleLabel, c);
 		
 		c = new GridBagConstraints();
@@ -85,15 +91,19 @@ public class MainView {
 		c.gridy = 2;
 		c.weightx = 1;
 		c.weighty = 0;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		mainFrame.add(seekSlider, c);
 		
 		c = new GridBagConstraints();
-		seekSlider = new JSlider();
+		mainPanel = new LibraryPanel();
+		mainPanel.setPreferredSize(new Dimension(640,480));
 		c.gridx = 3;
-		c.gridy = 2;
+		c.gridy = 3;
 		c.weightx = 1;
-		c.weighty = 0;
-		mainFrame.add(seekSlider, c);
+		c.weighty = 1;
+		c.gridheight = 2;
+		c.fill = GridBagConstraints.BOTH;
+		mainFrame.add(mainPanel, c);
 		
 		mainMenu.add(new JMenu("File"));
 		mainMenu.add(new JMenu("Daemon"));
