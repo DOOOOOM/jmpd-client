@@ -12,6 +12,11 @@ public class LyricsFetcher
 	 * The major method here is fetchLyrics. Other methods are helpers
 	 */
 	
+	public LyricsFetcher()
+	{
+		
+	}
+	
 	public static String fetchLyrics(String artistName, String songName)
 	{
 		return fetch(artistName, songName);
