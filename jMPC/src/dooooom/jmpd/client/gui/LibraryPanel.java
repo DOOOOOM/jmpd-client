@@ -7,10 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import dooooom.jmpd.data.Track;
 import dooooom.jmpd.data.TrackList;
@@ -29,6 +32,7 @@ public class LibraryPanel extends JPanel {
 	private JList artistSelection;
 	private JList albumSelection;
 	private JList songSelection;
+	private JLabel statusBar;
 	
 	/*
 	 * ListModels for the GUI Elements
@@ -65,6 +69,12 @@ public class LibraryPanel extends JPanel {
 		this.setLayout(new GridBagLayout());
 		
 		addGUIElements();
+		
+		//set the listmodels of the JList objects
+		artistSelection.setModel(artistList);
+		albumSelection.setModel(albumList);
+		songSelection.setModel(songList);
+		
 		addJListFilterListeners();
 	}
 	
@@ -94,23 +104,25 @@ public class LibraryPanel extends JPanel {
 			albumTracks.get(t.get("album")).add(t);
 		}
 		
-		updateJLists();
+		updateAllJLists();
 	}
 	
 	/*
 	 * After changes have been made to the selection, update the JLists with the new filters
 	 */
-	private void updateJLists() {
-		artistList = new DefaultListModel<>();
-		albumList = new DefaultListModel<>();
-		songList = new DefaultListModel<>();
-		
+	private void updateArtistJList() {
+		artistList.clear();
 		artistList.addElement("[any]");
-		albumList.addElement("[any]");
-		
+
 		for (String s : artistAlbums.keySet()) {
 			artistList.addElement(s);
 		}
+	}
+	
+	private void updateAlbumJList() {
+		albumList.clear();
+		
+		albumList.addElement("[any]");
 		
 		if(selectedArtist == null || selectedArtist.isEmpty()) {
 			//if no selected artist, add all albums
@@ -121,7 +133,11 @@ public class LibraryPanel extends JPanel {
 			for (String s : artistAlbums.get(selectedArtist))
 				albumList.addElement(s);
 		}
-		
+	}
+	
+	private void updateTrackJList() {
+		songList.clear();
+
 		TrackList availableTracks = (TrackList) (library.clone());
 		
 		//if there is an artist selected, filter the results
@@ -138,11 +154,12 @@ public class LibraryPanel extends JPanel {
 		for(Track t : availableTracks) {
 			songList.addElement(new TrackJListItem(t));
 		}
-		
-		//set the listmodels of the JList objects
-		artistSelection.setModel(artistList);
-		albumSelection.setModel(albumList);
-		songSelection.setModel(songList);
+	}
+	
+	private void updateAllJLists() {
+		updateArtistJList();
+		updateAlbumJList();
+		updateTrackJList();
 	}
 	
 	private void addElementFromTrack(DefaultListModel<String> d, Track t, String key, String defaultValue) {
@@ -191,10 +208,54 @@ public class LibraryPanel extends JPanel {
 		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
 		this.add(new JScrollPane(songSelection), c);
+		
+		c = new GridBagConstraints();
+		statusBar = new JLabel("Ready");
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 1;
+		c.weighty = 0;
+		c.fill = GridBagConstraints.BOTH;
+		this.add(statusBar, c);
 	}
 	
 	private void addJListFilterListeners() {
+		ListSelectionListener artistJListListener = new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				statusBar.setText(Integer.toString(artistSelection.getSelectedIndex()) + " " + (String)artistSelection.getSelectedValue());
+				
+				//if [any] selected
+				if(artistSelection.getSelectedIndex() == 0)
+					selectedArtist = "";
+				else
+					selectedArtist = (String) artistSelection.getSelectedValue();
+				
+				updateAlbumJList();
+				updateTrackJList();
+			}
+		};
 		
+		ListSelectionListener albumJListListener = new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				statusBar.setText(Integer.toString(albumSelection.getSelectedIndex()) + " " + (String)albumSelection.getSelectedValue());
+				
+				//if [any] selected
+				if(albumSelection.getSelectedIndex() == 0)
+					selectedAlbum = "";
+				else
+					selectedAlbum = (String) albumSelection.getSelectedValue();
+				
+				//updateAlbumJList();
+				updateTrackJList();
+			}
+		};
+		
+		artistSelection.addListSelectionListener(artistJListListener);
+		albumSelection.addListSelectionListener(albumJListListener);
 	}
 	
 	/*
