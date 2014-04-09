@@ -43,7 +43,7 @@ public class MainView {
 		 * This line adds random garbage data to the library in order to test library filter panes.
 		 * Comment it out if you don't want garbage data
 		 */
-		libraryPanel.setLibrary(TrackListGenerator.randomTracks(10));
+		libraryPanel.setLibrary(TrackListGenerator.randomTracksGib(10));
 		
 		addGUIElements();
 		
