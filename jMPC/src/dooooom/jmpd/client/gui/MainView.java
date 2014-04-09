@@ -13,6 +13,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
+import dooooom.jmpd.client.ConnectionController;
+
 
 public class MainView {
 	private JMenuBar mainMenu;
@@ -27,6 +29,8 @@ public class MainView {
 	private JComboBox playlistComboBox;
 	private JLabel albumArtLabel;
 	private JPanel mainPanel;
+	
+	private ConnectionController cc;
 	
 	JFrame mainFrame = new JFrame();
 

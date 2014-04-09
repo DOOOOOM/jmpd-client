@@ -3,39 +3,36 @@ package dooooom.jmpd.client.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import dooooom.jmpd.data.Track;
+import dooooom.jmpd.data.TrackList;
+
 public class LibraryPanel extends JPanel {
 	private static final long serialVersionUID = -8684560904793974034L;
 	
+	/*
+	 *  GUI Elements
+	 */
 	JList artistSelection;
 	JList albumSelection;
 	JList songSelection;
+	
+	DefaultListModel<String> artistList = new DefaultListModel<>();
+	
+	
 	
 	public LibraryPanel() {
 		this.setLayout(new GridBagLayout());
 		
 		GridBagConstraints c;
 		
-		String artistListData[] = { "Artist 1", "Artist 2", "Artist 3", "Artist 4",
-				"Artist 5", "Artist 6", "Artist 7", "Artist 8",
-				 "Artist 1", "Artist 2", "Artist 3", "Artist 4",
-					"Artist 5", "Artist 6", "Artist 7", "Artist 8"};
-		String albumListData[] = { "Album 1", "Album 2", "Album 3", "Album 4",
-				"Album 5", "Album 6", "Album 7", "Album 8",
-				 "Album 1", "Album 2", "Album 3", "Album 4",
-					"Album 5", "Album 6", "Album 7", "Album 8"};
-		String songListData[] = { "Song 1", "Song 2", "Song 3", "Song 4",
-				"Song 5", "Song 6", "Song 7", "Song 8",
-				 "Song 1", "Song 2", "Song 3", "Song 4",
-					"Song 5", "Song 6", "Song 7", "Song 8"};
-		
 		c = new GridBagConstraints();
-		artistSelection = new JList(artistListData);
+		artistSelection = new JList();
 		artistSelection.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		artistSelection.setLayoutOrientation(JList.VERTICAL);
 		c.gridx = 0;
@@ -43,24 +40,40 @@ public class LibraryPanel extends JPanel {
 		c.weightx = 1;
 		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
-		this.add(new JScrollPane(artistSelection), c);
+		this.add(new JScrollPane(), c);
 		
 		c = new GridBagConstraints();
-		albumSelection = new JList(albumListData);
+		albumSelection = new JList();
 		c.gridx = 1;
 		c.gridy = 0;
 		c.weightx = 1;
 		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
-		this.add(new JScrollPane(albumSelection), c);
+		this.add(new JScrollPane(), c);
 		
 		c = new GridBagConstraints();
-		songSelection = new JList(songListData);
+		songSelection = new JList();
 		c.gridx = 2;
 		c.gridy = 0;
 		c.weightx = 1;
 		c.weighty = 1;
 		c.fill = GridBagConstraints.BOTH;
 		this.add(new JScrollPane(songSelection), c);
+	}
+	
+	private void getDataFromLibrary(TrackList tl) {
+		
+	}
+	
+	private void addElementFromTrack(DefaultListModel<String> d, Track t, String key, String defaultValue) {
+		String value = t.get(key);
+		if(value == null)
+			value = defaultValue;
+		
+		d.addElement(value);
+	}
+	
+	private void addElementFromTrack(DefaultListModel<String> d, Track t, String key) {
+		addElementFromTrack(d, t, key, "Unknown");
 	}
 }
