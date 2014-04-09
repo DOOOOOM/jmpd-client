@@ -13,6 +13,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
+import dooooom.jmpd.client.ConnectionController;
+import dooooom.jmpd.data.testing.TrackListGenerator;
+
 
 public class MainView {
 	private JMenuBar mainMenu;
@@ -27,12 +30,50 @@ public class MainView {
 	private JComboBox playlistComboBox;
 	private JLabel albumArtLabel;
 	private JPanel mainPanel;
+	private LibraryPanel libraryPanel = new LibraryPanel(this);;
+	
+	private ConnectionController cc;
 	
 	JFrame mainFrame = new JFrame();
 
 	public MainView() {
 		mainFrame.setLayout(new GridBagLayout());
 		
+		/*
+		 * This line adds random garbage data to the library in order to test library filter panes.
+		 * Comment it out if you don't want garbage data
+		 */
+		libraryPanel.setLibrary(TrackListGenerator.randomTracks(10));
+		
+		addGUIElements();
+		
+		mainFrame.pack();
+		mainFrame.setVisible(true);
+	}
+	
+	/*
+	 * update everything with the info of this track:
+	 * 	albumArtLabel
+	 * 	currentTitleLabel
+	 * 	songLengthLabel
+	 */
+	public void setTrack(Track track) {
+		
+	}
+	
+	public void setSeek(int seconds) {
+		
+	}
+	
+	public void play() {
+		
+	}
+	
+	public JPanel getMainPanel() {
+		return mainPanel;
+	}
+	
+	private void addGUIElements() {
 		GridBagConstraints c;
 		
 		c = new GridBagConstraints();
@@ -95,7 +136,7 @@ public class MainView {
 		mainFrame.add(seekSlider, c);
 		
 		c = new GridBagConstraints();
-		mainPanel = new LibraryPanel();
+		mainPanel = libraryPanel;
 		mainPanel.setPreferredSize(new Dimension(640,480));
 		c.gridx = 3;
 		c.gridy = 3;
@@ -109,24 +150,6 @@ public class MainView {
 		mainMenu.add(new JMenu("Daemon"));
 		mainMenu.add(new JMenu("Client"));
 		mainMenu.add(new JMenu("Help"));
-		
-		mainFrame.pack();
-		mainFrame.setVisible(true);
 	}
-	
-	/*
-	 * update everything with the info of this track:
-	 * 	albumArtLabel
-	 * 	currentTitleLabel
-	 * 	songLengthLabel
-	 */
-	public void setTrack(Track track) {
-		
-	}
-	public void setSeek(int seconds) {
-		
-	}
-	public JPanel getMainPanel() {
-		return mainPanel;
-	}
+
 }
