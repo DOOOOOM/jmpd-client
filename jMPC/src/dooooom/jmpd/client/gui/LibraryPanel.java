@@ -22,9 +22,12 @@ public class LibraryPanel extends JPanel {
 	JList albumSelection;
 	JList songSelection;
 	
+	TrackList library = new TrackList();
+	TrackList visible = new TrackList();
+	
 	DefaultListModel<String> artistList = new DefaultListModel<>();
-	
-	
+	DefaultListModel<String> albumList = new DefaultListModel<>();
+	DefaultListModel<String> songList = new DefaultListModel<>();
 	
 	public LibraryPanel() {
 		this.setLayout(new GridBagLayout());
@@ -61,7 +64,19 @@ public class LibraryPanel extends JPanel {
 		this.add(new JScrollPane(songSelection), c);
 	}
 	
-	private void getDataFromLibrary(TrackList tl) {
+	private void addToLibrary(TrackList tl) {
+		
+	}
+	
+	private void addToLibrary(Track t) {
+		
+	}
+	
+	private void updateJLists() {
+		artistList = new DefaultListModel<>();
+		albumList = new DefaultListModel<>();
+		songList = new DefaultListModel<>();
+		
 		
 	}
 	
