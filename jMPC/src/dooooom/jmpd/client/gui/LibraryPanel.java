@@ -29,9 +29,9 @@ public class LibraryPanel extends JPanel {
 	/*
 	 *  GUI Elements
 	 */
-	private JList artistSelection;
-	private JList albumSelection;
-	private JList songSelection;
+	private JList<String> artistSelection;
+	private JList<String> albumSelection;
+	private JList<TrackJListItem> songSelection;
 	private JLabel statusBar;
 	
 	/*

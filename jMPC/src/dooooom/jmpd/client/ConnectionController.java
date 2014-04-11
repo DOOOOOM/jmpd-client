@@ -1,11 +1,13 @@
 package dooooom.jmpd.client;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
+
+import dooooom.jmpd.data.DaemonRequest;
+import dooooom.jmpd.data.DaemonResponse;
 
 /**
  * This controller class is intended to store connection state information for the daemon,
@@ -18,6 +20,10 @@ public class ConnectionController {
 	
 	public ConnectionController(String host, int port) throws Exception {
 		socket = new Socket(InetAddress.getByName(host), port);
+	}
+	
+	public DaemonResponse callDaemon(DaemonRequest request) {
+		return null;
 	}
 	
 	/*
