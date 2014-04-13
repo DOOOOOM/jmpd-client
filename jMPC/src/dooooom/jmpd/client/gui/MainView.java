@@ -18,6 +18,9 @@ import dooooom.jmpd.data.testing.TrackListGenerator;
 
 
 public class MainView {
+	/*
+	 * GUI Elements
+	 */
 	private JMenuBar mainMenu;
 	private JButton prevButton;
 	private JButton nextButton;
@@ -32,6 +35,9 @@ public class MainView {
 	private JPanel mainPanel;
 	private LibraryPanel libraryPanel = new LibraryPanel(this);;
 	
+	/*
+	 * This object will handle all daemon calls
+	 */
 	private ConnectionController cc;
 	
 	JFrame mainFrame = new JFrame();

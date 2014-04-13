@@ -6,9 +6,6 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import dooooom.jmpd.data.DaemonRequest;
-import dooooom.jmpd.data.DaemonResponse;
-
 /**
  * This controller class is intended to store connection state information for the daemon,
  * as well as handling all daemon calls themselves.  These daemon calls should be presented
@@ -30,13 +27,15 @@ public class ConnectionController {
 	 * sendMsg itself is private.
 	 * all calls to daemon are abstracted into other methods.
 	 */
-	private String sendMsg(String msg) throws Exception {
+	public String sendMsg(String msg) throws Exception {
 		String response = null;
 		BufferedReader is = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
 		outToServer.writeBytes(msg);
 		
-		response = is.readLine(); 
+		response = is.readLine();
+		
+		System.out.println("response: " + response);
 		return response;
 	}
 	
