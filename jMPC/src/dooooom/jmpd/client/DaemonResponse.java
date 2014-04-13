@@ -1,4 +1,4 @@
-package dooooom.jmpd.data;
+package dooooom.jmpd.client;
 
 public class DaemonResponse {
 
