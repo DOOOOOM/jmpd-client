@@ -1,7 +1,6 @@
 package dooooom.jmpd.client;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
@@ -20,17 +19,23 @@ public class ConnectionController {
 		socket = new Socket(InetAddress.getByName(host), port);
 	}
 	
+	public DaemonResponse callDaemon(DaemonRequest request) {
+		return null;
+	}
+	
 	/*
 	 * sendMsg itself is private.
 	 * all calls to daemon are abstracted into other methods.
 	 */
-	private String sendMsg(String msg) throws Exception {
+	public String sendMsg(String msg) throws Exception {
 		String response = null;
 		BufferedReader is = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
 		outToServer.writeBytes(msg);
 		
-		response = is.readLine(); 
+		response = is.readLine();
+		
+		System.out.println("response: " + response);
 		return response;
 	}
 	
