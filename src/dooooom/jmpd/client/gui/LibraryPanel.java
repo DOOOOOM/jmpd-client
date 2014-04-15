@@ -37,9 +37,9 @@ public class LibraryPanel extends JPanel {
 	/*
 	 * ListModels for the GUI Elements
 	 */
-	private DefaultListModel<String> artistList = new DefaultListModel<>();
-	private DefaultListModel<String> albumList = new DefaultListModel<>();
-	private DefaultListModel<TrackJListItem> songList = new DefaultListModel<>();
+	private DefaultListModel<String> artistList = new DefaultListModel<String>();
+	private DefaultListModel<String> albumList = new DefaultListModel<String>();
+	private DefaultListModel<TrackJListItem> songList = new DefaultListModel<TrackJListItem>();
 	
 	/*
 	 * Current Selections (for filtering purposes)
