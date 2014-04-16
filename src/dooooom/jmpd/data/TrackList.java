@@ -26,9 +26,10 @@ import javax.json.stream.JsonParser;
 
 public class TrackList extends ArrayList<Track> 
 {
-	
+
 	final String dbLocation = new FileSystemScanner().getFolderPath() + new FileSystemScanner().getS() + "database";
-	
+	int nextID = 1;
+
 	public TrackList(ArrayList<Track> list)
 	{
 		for(Track t : list)
@@ -36,8 +37,18 @@ public class TrackList extends ArrayList<Track>
 			this.add(t);
 		}
 	}
-	
+
 	public TrackList()
+	{
+		
+	}
+	
+	public void updateNextID()
+	{
+		nextID = Integer.parseInt(this.get(this.size()).get("id")) + 1;
+	}
+	
+	public void loadDatabase()
 	{
 		ArrayList<String> getID = getTrackList();
 		for(int i = 0; i < getID.size(); i++){
@@ -50,21 +61,22 @@ public class TrackList extends ArrayList<Track>
 			this.add(newTrack);	
 		}
 		
+		updateNextID();
 	}
-	
+
 	public TrackList search(String key, String value) 
 	{
 		TrackList result = new TrackList();
-		
+
 		for(Track tr : this) 
 		{
 			if(tr.get(key).equals(value))
 				result.add(tr);
 		}
-		
+
 		return result;
 	}
-	
+
 	public boolean trackIDExists(Track t) 
 	{
 		if(this.search("id", t.get("id")).size() > 0)
@@ -73,6 +85,15 @@ public class TrackList extends ArrayList<Track>
 			return false;
 	}
 	
+	public static void main(String[] args)
+	{
+		TrackList t = new TrackList();
+		t.loadDatabase();
+		for (Track tr : t)
+			System.out.println(tr.get("id") + " " + tr.get("title") + " " + tr.get("artist") + " " + tr.get("album"));
+		System.out.print("The next ID is :" + t.nextID);
+	}
+
 	/**
 	 * Database Json functions
 	 */
@@ -101,7 +122,7 @@ public class TrackList extends ArrayList<Track>
 					returnedObject = rewriteJson(copyInto,jsonst,null);
 					mainBuilder.add(name, returnedObject.build());
 				}	
-			
+
 			default:
 				System.out.println("Default");
 				break;			
@@ -123,9 +144,10 @@ public class TrackList extends ArrayList<Track>
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+		nextID++;
+
 	}
-	
+
 	public JsonObject mapToJsonObject(Iterator<String> keys,JsonObjectBuilder obj,Map <String,String> data){
 		/**
 		 * Helper function used to parse json
@@ -139,7 +161,7 @@ public class TrackList extends ArrayList<Track>
 			return jb;
 		}
 	}
-	
+
 	public JsonObjectBuilder rewriteJson(JsonObjectBuilder copyInto,JsonValue tree,String key){
 		/**
 		 * Helper function used to parse json
@@ -159,9 +181,9 @@ public class TrackList extends ArrayList<Track>
 			break;
 		}
 		return copyInto;
-		
+
 	}
-	
+
 	public ArrayList<String> getTrackList(){
 		JsonParser jp = null;
 		boolean leadingKEY = false;
@@ -201,7 +223,7 @@ public class TrackList extends ArrayList<Track>
 		jp.close();		
 		return trackID;
 	}
-	
+
 	public Map<String,String> getEntry(String find){
 		/**
 		 * getEntry: Would be used to search for an entry
@@ -247,11 +269,11 @@ public class TrackList extends ArrayList<Track>
 					    		break;
 					    	case START_OBJECT:
 					    		break;
-					    	
+
 					    	}
 					    }
 					    //data point. Data is ready at this point.
-					    System.out.println("find "+find+" search "+searchKey);
+					    //System.out.println("find "+find+" search "+searchKey);
 					    if(searchKey.compareTo(find) == 0){
 					    	return data;
 					    }
