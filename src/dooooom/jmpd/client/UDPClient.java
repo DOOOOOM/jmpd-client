@@ -1,4 +1,4 @@
-package dooooom.jmpc;
+package dooooom.jmpd;
 import java.io.*;
 
 import connection_package.UDPServer.Command;
