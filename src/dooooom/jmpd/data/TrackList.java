@@ -1,7 +1,7 @@
 //package dooooom.jmpd.data;
-
-
 import dooooom.jmpd.FileSystemScanner;
+
+
 
 
 
@@ -26,6 +26,7 @@ import javax.json.stream.JsonParser;
 
 public class TrackList extends ArrayList<Track> 
 {
+	
 	final String dbLocation = new FileSystemScanner().getFolderPath() + new FileSystemScanner().getS() + "database";
 	
 	public TrackList(ArrayList<Track> list)
@@ -38,6 +39,16 @@ public class TrackList extends ArrayList<Track>
 	
 	public TrackList()
 	{
+		ArrayList<String> getID = getTrackList();
+		for(int i = 0; i < getID.size(); i++){
+			Map<String,String> result = getEntry(getID.get(i));
+			Track newTrack = new Track();
+			for(Map.Entry<String, String> entry : result.entrySet()){
+				//make a track
+				newTrack.put(entry.getKey(), result.get(entry.getKey()));
+			}
+			this.add(newTrack);	
+		}
 		
 	}
 	
@@ -149,6 +160,46 @@ public class TrackList extends ArrayList<Track>
 		}
 		return copyInto;
 		
+	}
+	
+	public ArrayList<String> getTrackList(){
+		JsonParser jp = null;
+		boolean leadingKEY = false;
+		String ldKEY = null;
+		ArrayList<String> trackID = new ArrayList<String>();
+		try {
+			jp = Json.createParser(new FileReader(dbLocation));
+			while(jp.hasNext()){				
+				JsonParser.Event event = jp.next();				
+				switch(event){
+				case START_OBJECT:
+					    while(event.toString() != "END_OBJECT"){
+					    	event = jp.next();
+					    	switch(event){
+					    	case KEY_NAME:
+					    		if(!leadingKEY){
+					    			trackID.add(jp.getString()) ;
+					    			leadingKEY = true;
+					    		}			    		
+					    		break;
+					    	case START_OBJECT:
+					    		break;					    	
+					    	}
+					    }
+					break;
+				case KEY_NAME:
+					trackID.add(jp.getString()) ;
+					break;
+				case END_OBJECT:
+					break;				
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jp.close();		
+		return trackID;
 	}
 	
 	public Map<String,String> getEntry(String find){
