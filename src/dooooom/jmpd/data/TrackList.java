@@ -1,7 +1,7 @@
 //package dooooom.jmpd.data;
 
 
-import dooooom.jmpd.client.FileSystemScanner;
+import dooooom.jmpd.FileSystemScanner;
 
 
 
