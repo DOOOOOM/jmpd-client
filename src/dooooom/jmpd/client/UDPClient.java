@@ -160,7 +160,7 @@ public class UDPClient {
 	
 	public void getPlaylist() throws Exception{
 		System.out.println("about to send");
-		jsonParser.sendMessage(Command.ADDTOPLAYLIST, "soul");
+		jsonParser.sendMessage(UDPServer.Command.ADDTOPLAYLIST, "soul");
 		if(clientSocket.isClosed()){
 			System.out.println("clientSocket is already closed at this point");
 		}
