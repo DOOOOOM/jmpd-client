@@ -1,5 +1,10 @@
 //package dooooom.jmpd.data;
 
+
+import dooooom.jmpd.client.FileSystemScanner;
+
+
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,7 +26,7 @@ import javax.json.stream.JsonParser;
 
 public class TrackList extends ArrayList<Track> 
 {
-	final String dbLocation = "";
+	final String dbLocation = new FileSystemScanner().musicFolderPath + new FileSystemScanner().s + "database";
 	
 	public TrackList(ArrayList<Track> list)
 	{
