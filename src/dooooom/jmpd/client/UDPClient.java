@@ -44,7 +44,7 @@ public class UDPClient {
 				
 			});
 			threadListener.start();
-			client.sendMessage(Command.ADDTOPLAYLIST, "gospel");
+			client.sendMessage(UDPServer.Command.ADDTOPLAYLIST, "gospel");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
