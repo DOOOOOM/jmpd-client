@@ -26,7 +26,7 @@ import javax.json.stream.JsonParser;
 
 public class TrackList extends ArrayList<Track> 
 {
-	final String dbLocation = new FileSystemScanner().musicFolderPath + new FileSystemScanner().s + "database";
+	final String dbLocation = new FileSystemScanner().getFolderPath() + new FileSystemScanner().s + "database";
 	
 	public TrackList(ArrayList<Track> list)
 	{
