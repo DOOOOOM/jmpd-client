@@ -1,22 +1,15 @@
 package dooooom.jmpd.client.gui;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import dooooom.jmpd.data.Track;
+import dooooom.jmpd.data.TrackList;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import dooooom.jmpd.data.Track;
-import dooooom.jmpd.data.TrackList;
 
 public class LibraryPanel extends JPanel {
 	private static final long serialVersionUID = -8684560904793974034L;
