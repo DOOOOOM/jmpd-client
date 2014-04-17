@@ -1,7 +1,6 @@
-package dooooom.jmpd;
+package dooooom.jmpd.client;
 import java.io.*;
 
-import dooooom.jmpd.UDPServer.Command;
 import dooooom.jmpd.JParser;
 
 import java.net.*;
@@ -11,6 +10,12 @@ import javax.json.Json;
 import javax.json.stream.JsonGenerator;
 
 public class UDPClient {
+    public enum Command {
+        NULL, TOGGLE, PAUSE, PLAY, STOP, PREV,
+        NEXT, ADD, ADDTOPLAYLIST, REM,
+        REMPLAYLIST, DEL, ACK
+    }
+
     final static int messageLength = 1024;
     static DatagramSocket clientSocket;
     InetAddress IPAddress;
@@ -45,15 +50,15 @@ public class UDPClient {
                     String input = in.nextLine();
                     System.out.println(input);
                     if (input.equals("t")) {
-                        client.sendMessage(UDPServer.Command.TOGGLE, "");
+                        client.sendMessage(Command.TOGGLE, "");
                     } else if (input.equals("n")) {
-                        client.sendMessage(UDPServer.Command.NEXT, "");
+                        client.sendMessage(Command.NEXT, "");
                     } else if (input.equals("p")) {
-                        client.sendMessage(UDPServer.Command.PREV, "");
+                        client.sendMessage(Command.PREV, "");
                     } else if (input.equals("s")) {
-                        client.sendMessage(UDPServer.Command.STOP, "");
+                        client.sendMessage(Command.STOP, "");
                     } else if (input.equals("a")) {
-                        client.sendMessage(UDPServer.Command.ADD, "");
+                        client.sendMessage(Command.ADD, "");
                     }
                 }
             } catch (NoSuchElementException e) {
@@ -81,7 +86,7 @@ public class UDPClient {
         }
     }
 
-    public void sendMessage(UDPServer.Command cmd,String arg) throws Exception{
+    public void sendMessage(UDPClient.Command cmd,String arg) throws Exception{
         int port = 5005;
         byte[] envelope;
         ByteArrayOutputStream outGoing = new ByteArrayOutputStream();
@@ -98,7 +103,7 @@ public class UDPClient {
         clientSocket.send(sendPacket);
     }
 
-    public void sendMessageWithArgList(UDPServer.Command cmd, List<String> result) throws Exception{
+    public void sendMessageWithArgList(UDPClient.Command cmd, List<String> result) throws Exception{
         int port = 5005;
         byte[] envelope;
         int PORT = Configure();
@@ -172,7 +177,7 @@ public class UDPClient {
 
     public void getPlaylist() throws Exception{
         System.out.println("about to send");
-        jsonParser.sendMessage(UDPServer.Command.ADDTOPLAYLIST, "soul");
+        jsonParser.sendMessage(Command.ADDTOPLAYLIST, "soul");
         if(clientSocket.isClosed()){
             System.out.println("clientSocket is already closed at this point");
         }
