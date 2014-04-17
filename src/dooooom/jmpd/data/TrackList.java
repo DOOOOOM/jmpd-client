@@ -45,7 +45,11 @@ public class TrackList extends ArrayList<Track>
 	
 	public void updateNextID()
 	{
-		nextID = Integer.parseInt(this.get(this.size()).get("id")) + 1;
+		for(Track track : this)
+			if (Integer.parseInt(track.get("id")) > nextID)
+				nextID = Integer.parseInt(track.get("id"));
+		nextID++;
+		//nextID = Integer.parseInt( this.get(new Integer(this.size()).toString()) . get("id") );
 	}
 	
 	public void loadDatabase()
