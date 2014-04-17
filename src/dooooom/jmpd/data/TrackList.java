@@ -1,10 +1,8 @@
-//package dooooom.jmpd.data;
+package dooooom.jmpd.data;
 import dooooom.jmpd.FileSystemScanner;
 
-
-
-
-
+import javax.json.*;
+import javax.json.stream.JsonParser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,20 +12,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
-import javax.json.JsonReader;
-import javax.json.JsonString;
-import javax.json.JsonStructure;
-import javax.json.JsonValue;
-import javax.json.JsonWriter;
-import javax.json.stream.JsonParser;
-
 public class TrackList extends ArrayList<Track> 
 {
-
-	final String dbLocation = new FileSystemScanner().getFolderPath() + new FileSystemScanner().getS() + "database";
+	public final String dbLocation = new FileSystemScanner().getFolderPath() + new FileSystemScanner().getS() + "database";
 	int nextID = 1;
 
 	public TrackList(ArrayList<Track> list)
@@ -131,10 +118,13 @@ public class TrackList extends ArrayList<Track>
 				System.out.println("Default");
 				break;			
 			}
-		} catch (FileNotFoundException |javax.json.stream.JsonParsingException e ) {
+		} catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (javax.json.stream.JsonParsingException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}		
+			e.printStackTrace();
+		}
 		JsonObjectBuilder obj = Json.createObjectBuilder();
 		JsonObject object = mapToJsonObject(data.keySet().iterator(),obj,data);
 		System.out.println(object.toString());
